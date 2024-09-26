@@ -12,8 +12,14 @@ S = fft2(circshift(Pbig,1-center));
 j = fft2(X);
 
 B = real(ifft2(S.*fft2(Gd)));
+B = B + 1e-2*randn(size(B));
 
-Xtrue = real(ifft2(fft2(B)./S));
+Xrecon = real(ifft2(fft2(B)./S));
 
 %figure()
+subplot(1,3,1)
 imagesc(Xtrue),colormap('gray')
+subplot(1,3,2)
+imagesc(B),colormap('gray')
+subplot(1,3,3)
+imagesc(Xrecon),colormap('gray')

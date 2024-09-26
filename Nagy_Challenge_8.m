@@ -14,7 +14,7 @@ P = psfGauss(32,1);
 Bzero = conv2(Gzero, P, 'same');
 Bzeroext = Bzero(513:1024, 513:1024);
 
-figure(1)
+figure, subplot(1,2,1)
 imagesc(Bzeroext), colormap('gray');
 
 
@@ -24,7 +24,7 @@ Bperiod = conv2(Gperiod, P, "same");
 Bperiodext = Bperiod(513:1024, 513:1024);
 
 
-figure(2)
+subplot(1,2,2)
 imagesc(Bperiodext), colormap('gray');
 
 
