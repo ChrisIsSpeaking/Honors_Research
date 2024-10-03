@@ -16,7 +16,7 @@ B = B + 1e-2*randn(size(B));
 
 Xrecon = real(ifft2(fft2(B)./S));
 
-%figure()
+figure()
 subplot(1,3,1)
 imagesc(Xtrue),colormap('gray')
 subplot(1,3,2)
