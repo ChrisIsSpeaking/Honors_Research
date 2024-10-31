@@ -33,6 +33,9 @@ b       = Ax + eta;
 figure(1), 
   plot(t,x_true,'k',t,b,'ko')
 
+
+  
+
 %  Finally, compute the least squares solution as well as the norm of the
 %  perturbations of x and b.
 figure(2),

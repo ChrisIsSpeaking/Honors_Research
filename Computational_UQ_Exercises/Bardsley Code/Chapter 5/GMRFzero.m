@@ -11,7 +11,7 @@ clear all, close all
 % Build the L matrix corresponding to forward or backward difference
 %     -x(i-1)-x(i+1)+2*x(i)
 %      x(0) = x(n+1) = 0
-n       = 128;
+n       = 32;
 one_vec = ones(n,1);
 L1D     = spdiags([-one_vec 2*one_vec -one_vec],[-1 0 1],n,n);
 R       = chol(L1D);
