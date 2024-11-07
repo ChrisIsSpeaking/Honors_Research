@@ -1,6 +1,6 @@
-function noise = whiteNoise(b, noiseLevel, rngSeed)
+function [N, sigma] = WhiteNoise(b, level, seed)
 %
-%      N = whiteNoise(b, level, seed);
+%      [N,sigma] = WhiteNoise(b, level, seed);
 %
 %  This function generates Gaussian white noise for the 
 %  data b. 
@@ -16,18 +16,20 @@ function noise = whiteNoise(b, noiseLevel, rngSeed)
 %  Output: N - array same dimension as b, containing pseudo-random
 %              values drawn from a normal distribution with mean zero
 %              and standard deviation one, and scaled as described above.
+%          sigma - standard deviation of the noise
 %
 
 % Check inputs and set default values.
-if nargin < 2 
-  noiseLevel = 0.01;
-  if nargin > 2
-    rng(rngSeed);
-  end
-end
+if nargin == 1, level = []; seed = []; end
+if nargin == 2, seed = []; end
+if isempty(level), level = 0.01; end
 
 % Generate noise.
-noise = randn(size(b));
-noise = noise / norm(noise(:));
-noise = noiseLevel*norm(b(:))*noise;
+if ~isempty(seed)
+  rng(seed)
 end
+N = randn(size(b));
+nN = norm(N(:));
+N = N / nN;
+N = level*norm(b(:))*N;
+sigma = level*norm(b(:))/nN;
