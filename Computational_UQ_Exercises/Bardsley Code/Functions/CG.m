@@ -87,6 +87,8 @@ function [x,iter_hist,term_code] = CG(x0,b,params,a_mult);
   else
     z = g;                          %  No preconditioning.
   end
+
+  
   d = -z;                           %  Initial search direction.
   D = -d(:);
   if isnumeric(a_mult)            %  Compute A*d.

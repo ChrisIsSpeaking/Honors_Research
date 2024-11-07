@@ -70,10 +70,15 @@ for i=1:nsamps
 end
 toc
 close(h)   
+%%
 % Finally, compute the mean and 95% credibility images and plot them.
 x_mean = mean(xsamp')';
 quants = plims(xsamp',[0.025,0.975])';
+pixel_variance = var(xsamp, 0, 2);
 figure(3), colormap(1-gray)
   imagesc(reshape(x_mean,n,n)), colorbar
 figure(4), colormap(1-gray)
-  imagesc(reshape(quants(:,2)-quants(:,1),n,n)), colorbar
+  imagesc(reshape(pixel_variance,n,n)), colorbar
+
+
+  
