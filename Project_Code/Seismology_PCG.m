@@ -40,8 +40,8 @@ del = lam*alpha;
 % plot(x,y,x,y1)
 
 alpha2  = fminbnd(RegFun1,0,1)
-options.regparam = 'optimal';
-[X, info] = IRhybrid_lsqr(A, bn,options);
+options = HyBRset('regpar', 'optimal', 'x_true', x_true(:));
+[x, info] = HYBR(A,bn,[],options);
 var = lam*info.RegP(end)^2
 del
 

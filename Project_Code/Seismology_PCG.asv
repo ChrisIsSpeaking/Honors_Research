@@ -38,13 +38,13 @@ del = lam*alpha;
 %     y(i) = RegFun(x(i));
 % end
 % plot(x,y,x,y1)
-% 
-% alpha2  = fminbnd(RegFun1,0,1)
-% options.regparam = 'gcv';
-% [X, info] = IRhybrid_lsqr(A, bn,options);
-% var = lam*info.RegP(end)^2
-% del
-% 
+
+alpha2  = fminbnd(RegFun1,0,1)
+options = HyBRset('regpar', 'optimal', 'xtyr');
+[x, info] = HYBR(A,bn,[],options);
+var = lam*info.RegP(end)^2
+del
+
 
 %%
 
@@ -60,8 +60,8 @@ del = lam*alpha;
 % del =0.5;
 
 %% Constructing the matrix "M"
-
-AtAL = lam*(A'*A) + del*L;
+gamma = full(lam*A'*A + del*L);
+AtAL = gamma;
 Atb = lam*A'*bn;
 N = size(A',2);
 M = size(L,2);
@@ -92,25 +92,13 @@ subplot(2,3,2),imshow(reshape(bn,ProbInfo.bSize),[])
 subplot(2,3,3),imshow(reshape(x_avg,ProbInfo.xSize),[])
 subplot(2,3,4),imshow(reshape(x_storage(:,21),ProbInfo.xSize),[])
 subplot(2,3,5),imshow(reshape(x_storage(:,34),ProbInfo.xSize),[])
-subplot(2,3,6),imshow(reshape(pixel_variance,ProbInfo.xSize),[]), colorbar
+%subplot(2,3,6),imshow(reshape(pixel_variance,ProbInfo.xSize),[]), colorbar
 
 %% Plotting Variance
 
-pixel_variance = var(x_storage(:,2:end), 0, 2);
-figure(4),
-imshow(reshape(pixel_variance,ProbInfo.xSize),[])
-
-%%
-
 
 pixel_variance = var(x_storage, 0,2);
-figure(3),
-subplot(2,3,1),imshow(reshape(x_true,ProbInfo.xSize),[])
-subplot(2,3,2),imshow(reshape(xMAP,ProbInfo.xSize),[]), colorbar
-%subplot(2,3,2),imshow(reshape(bn,ProbInfo.bSize),[])
-subplot(2,3,3),imshow(reshape(xmean,ProbInfo.xSize),[]), colorbar
-subplot(2,3,4),imshow(reshape(xsamp(:,21),ProbInfo.xSize),[])
-%subplot(2,3,5),imshow(reshape(xsamp(:,500),ProbInfo.xSize),[])
-subplot(2,3,5),imshow(reshape(diag(inv(gamma)),ProbInfo.xSize),[]), colorbar
-subplot(2,3,6),imshow(reshape(pixel_variance,ProbInfo.xSize),[]), colorbar
+figure(5),
+subplot(2,1,1),imshow(reshape(diag(inv(gamma)),ProbInfo.xSize),[]), colorbar
+subplot(2,1,2),imshow(reshape(pixel_variance,ProbInfo.xSize),[]), colorbar
 
