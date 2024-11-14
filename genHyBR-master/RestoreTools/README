@@ -1,0 +1,41 @@
+
+             =================================
+                 RestoreTools, Version 1.4
+                    (No IP Toolbox)
+             =================================
+
+Use this version if Matlab's Image Processing Toolbox is not available.
+We recommend using the Image Processing Toolbox if possible.
+
+This version contains a new psfPrec that is based on an approximate
+SVD of the psfMatrix.  In most cases it performs much better than
+the old version, which has been renamed fftPrec.
+
+This version also contains a new iterative method, HyBR, written by
+Julianne Chung.  This is a very powerful Lanczos based hybrid method
+that will automatically choose (Tikhonov) regularization parameters,
+and automatically determine a stopping iteration.  Default parameters,
+tolerances, etc., can be changed with the HyBRset function.
+
+"RestoreTools" is an object oriented Matlab implementation of
+algorithms that can be used for image restoration problems.  Some
+examples illustrating how to use this package can be found in the
+directory ./Examples
+
+This current version, 1.s, can be used for iterative image restoration
+methods.  Direct methods TSVD and Tikhonov can also be used.
+
+The principal developers of the code are:
+
+   James Nagy and his students, including Lisa Perrone, Katrina Palmer,
+   and Julianne Chung.
+   
+    Emory University
+    Atlanta Georgia, USA
+
+This software has been developed as a pedagogical and research tool, 
+and is provided "as is", without any warranty of any kind.
+
+Please send bug reports to:  nagy@mathcs.emory.edu
+
+Last modified:  22 March, 2007.

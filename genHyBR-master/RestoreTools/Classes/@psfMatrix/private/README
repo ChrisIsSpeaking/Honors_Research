@@ -1,0 +1,17 @@
+
+The original version of RestoreTools required the following
+functions from Matlab's Image Processing Toolbox:
+
+   dct2
+   idct2
+   padarray (and mkconstarray)
+
+At the Householder meeting in Peebles, Scotland, 
+May 17--21, we requested, and received permission from 
+Cleve Moler, to make copies of these functions 
+from the Image Processing Toolbox.
+
+The ParseInputs function in padarray had several Image
+Processing Toolbox dependencies, so we modified it a bit.
+
+  Jim Nagy, January 5, 2003.

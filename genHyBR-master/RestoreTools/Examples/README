@@ -1,0 +1,38 @@
+
+To run these examples, you first need to set search paths to
+the codes in RestoreTools.  This can be done by running the
+script startup.m
+
+The most recent version of RestoreTools has two new features:
+
+1. psfPrec 
+   Has been updated to compute an approximate SVD preconditioner.
+   In most cases this preconditioner works much better than the
+   old (ciculant) one, which has been renamed fftPrec.
+2. HyBR
+   This is a new iterative method that implements a hybrid Lanczos
+   bidiagonalization/Tikhonov regularization method.  Default
+   regularization parameters and stopping criteria are chosen for
+   the user.  See reference [1] below.
+
+An illustration of the basic computations is in:
+
+  basic_computations.m
+
+Several example using HyBR can be found in:
+
+  HyBR_examples.m
+
+The mfiles example_xpy.m correspond to the examples from [2], where
+the original version of these codes is described.
+
+References: 
+[1] J. Chung, J. Nagy and D. O'Leary, "A Weighted GCV Method
+    for Lanczos Hybrid Regularization", submitted, Feb., 2007.
+[2] J. Nagy, K. Palmer, L. Perrone, "Iterative Methods for Image 
+    Deblurring: A Matlab Object Oriented Approach",
+    Numerical Algorithms, 36 (2004), pp. 73-93.
+
+For more information, see:
+
+   http://www.mathcs.emory.edu/RestoreTools
