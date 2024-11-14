@@ -77,7 +77,7 @@ quants = plims(xsamp',[0.025,0.975])';
 pixel_variance = var(xsamp, 0, 2);
 figure(3), colormap(1-gray)
   imagesc(reshape(x_mean,n,n)), colorbar
-figure(4), colormap(1-gray)
+figure(4), colormap(gray)
   imagesc(reshape(pixel_variance,n,n)), colorbar
 
 

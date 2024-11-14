@@ -1,4 +1,6 @@
-function [x,iter_hist] = PCG2D(M,b,x0, tol, max_iter, P);
+function [x,iter_hist] = PCG2D(A,b,x0, tol, max_iter, P)
+
+n = length(x0)/2;
 
 % %%% Checking user inputed conditions
 if nargin < 6 || isempty(P)
@@ -17,7 +19,7 @@ if nargin < 3 || isempty(x0)
 else
     x = x0;
 
-%%% Checking M
+%%% Checking P
 if isa(P, 'function_handle')
     P_func = P;
 else
@@ -25,18 +27,19 @@ else
 end
 
 %%% Checking A
-if isa(M, 'function_handle')
-    M_func = M;
+if isa(A, 'function_handle')
+    A_func = A;
 else
     %Does splitting it into two mat-vecs save flop count when multipling
     %A'*A*x? what if I just multiply by AtA*x, where AtA is A'*A already
     %solved for?
-    M_func = @(x) M*x;
+    A_func = @(x) A*x;
 end
+
 
 %%% Intializing the Conjugate Gradient
 
-gk = M_func(x0) - b;
+gk = A_func(x0) - b;
 zk = P_func(gk);
 pk = -zk;
 delk_1 = gk(:)'*zk(:);
@@ -44,7 +47,7 @@ xk=x0;
 
 %%% Running the Conjugate Gradient
 for iter = 1:max_iter
-    hk_1 = M_func(pk);
+    hk_1 = A_func(pk);
     tauk_1 = delk_1 / (pk' * hk_1);
     xk = xk + tauk_1 * pk;
     gk = gk + tauk_1 * hk_1; 
